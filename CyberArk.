@@ -1,0 +1,19 @@
+// config.go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+type Config struct {
+	Username string
+	Password string
+	BaseURL  string
+}
+
+func (c *Config) Client() (*http.Client, error) {
+	client := &http.Client{}
+	// Implement the logic to authenticate and return an HTTP client
+	return client, nil
+}

@@ -1,0 +1,3 @@
+mkdir terraform-provider-cyberark
+cd terraform-provider-cyberark
+go mod init github.com/yourusername/terraform-provider-cyberark

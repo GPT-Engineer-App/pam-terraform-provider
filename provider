@@ -1,0 +1,12 @@
+provider "cyberark" {
+  username = "your-username"
+  password = "your-password"
+  base_url = "https://your-cyberark-instance"
+}
+
+resource "cyberark_account" "example" {
+  account_name = "example-account"
+  username     = "example-username"
+  password     = "example-password"
+  platform_id  = "WinServerLocal"
+}

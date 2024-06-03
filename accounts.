@@ -1,0 +1,54 @@
+// resource_cyberark_account.go
+package main
+
+import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
+
+func resourceCyberArkAccount() *schema.Resource {
+	return &schema.Resource{
+		Create: resourceCyberArkAccountCreate,
+		Read:   resourceCyberArkAccountRead,
+		Update: resourceCyberArkAccountUpdate,
+		Delete: resourceCyberArkAccountDelete,
+
+		Schema: map[string]*schema.Schema{
+			"account_name": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"username": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"password": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"platform_id": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+		},
+	}
+}
+
+func resourceCyberArkAccountCreate(d *schema.ResourceData, m interface{}) error {
+	// Implement the logic to create an account in CyberArk
+	return nil
+}
+
+func resourceCyberArkAccountRead(d *schema.ResourceData, m interface{}) error {
+	// Implement the logic to read an account from CyberArk
+	return nil
+}
+
+func resourceCyberArkAccountUpdate(d *schema.ResourceData, m interface{}) error {
+	// Implement the logic to update an account in CyberArk
+	return nil
+}
+
+func resourceCyberArkAccountDelete(d *schema.ResourceData, m interface{}) error {
+	// Implement the logic to delete an account from CyberArk
+	return nil
+}

@@ -1,0 +1,47 @@
+// main.go
+package main
+
+import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+)
+
+func main() {
+	plugin.Serve(&plugin.ServeOpts{
+		ProviderFunc: func() *schema.Provider {
+			return &schema.Provider{
+				Schema: map[string]*schema.Schema{
+					"username": {
+						Type:        schema.TypeString,
+						Required:    true,
+						DefaultFunc: schema.EnvDefaultFunc("CYBERARK_USERNAME", nil),
+					},
+					"password": {
+						Type:        schema.TypeString,
+						Required:    true,
+						DefaultFunc: schema.EnvDefaultFunc("CYBERARK_PASSWORD", nil),
+					},
+					"base_url": {
+						Type:        schema.TypeString,
+						Required:    true,
+						DefaultFunc: schema.EnvDefaultFunc("CYBERARK_BASE_URL", nil),
+					},
+				},
+				ResourcesMap: map[string]*schema.Resource{
+					"cyberark_account": resourceCyberArkAccount(),
+				},
+				ConfigureFunc: providerConfigure,
+			}
+		},
+	})
+}
+
+func providerConfigure(d *schema.ResourceData) (interface{}, error) {
+	config := Config{
+		Username: d.Get("username").(string),
+		Password: d.Get("password").(string),
+		BaseURL:  d.Get("base_url").(string),
+	}
+
+	return config.Client()
+}
